@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{%block title%}
+Transport at {{island.capitalize()}}
+
+{%endblock%}
+
+{%block content%}
+
+<style>
+    select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    #submitBtn {
+        background-color: #5100ff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #submitBtn:hover {
+        background-color: #4200b3;
+    }
+ 
+</style>
+{%if island == 'poros' or island == "spetses"%}
+    <h1>Select Route</h1>
+    <div class="container mt-4">
+        <label for="startPlaceId">Start Place:</label>
+        <select id="startPlaceId" name="startPlaceId" class="form-control">
+            <option value="">Select a start place</option>
+            <optgroup label="Museum">
+                {% for museum in museum %}
+                <option value="{{ museum.placeID }}">{{ museum.nameMuseum }}</option>
+                {% endfor %}
+            </optgroup>
+            <optgroup label="Beach">
+                {% for beach in beaches %}
+                <option value="{{ beach.placeID }}">{{ beach.beachName }}</option>
+                {% endfor %}
+            </optgroup>
+            <optgroup label="Stay">
+                {% for stay in stay %}
+                <option value="{{ stay.placeID }}">{{ stay.name }}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+
+        <label for="destinationPlaceId" class="mt-2">Destination Place:</label>
+        <select id="destinationPlaceId" name="destinationPlaceId" class="form-control">
+            <option value="">Select a destination place</option>
+            <optgroup label="Museum">
+                {% for museum in museum %}
+                <option value="{{ museum.placeID }}">{{ museum.nameMuseum }}</option>
+                {% endfor %}
+            </optgroup>
+            <optgroup label="Beach">
+                {% for beach in beaches %}
+                <option value="{{ beach.placeID }}">{{ beach.beachName }}</option>
+                {% endfor %}
+            </optgroup>
+            <optgroup label="Stay">
+                {% for stay in stay %}
+                <option value="{{ stay.placeID }}">{{ stay.name }}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+        
+
+        <button onclick="act_bus()"  id="submitBtn" class="mt-3">Submit</button>
+        
+
+        
+    </div>
+
+    </body>
+ 
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{%else%}
+
+<ul class="list-group">
+    <li class="list-group-item">
+      <h3 class="mb-0">Water Taxi</h3>
+    </li>
+    {% for route in route %}
+      <li class="list-group-item">
+        <p class="mb-0">{{ route.BusName }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  
+{%endif%}
+<script>
+    act_bus = function() {
+    var startPlaceId = document.getElementById("startPlaceId").value;
+    var destinationPlaceId = document.getElementById("destinationPlaceId").value;
+
+    if (startPlaceId == "" || destinationPlaceId == "") {
+        alert("Please select a start place and a destination place");
+        return;
+    }
+    else if (startPlaceId == destinationPlaceId) {
+        alert("Start place and destination place must be different");
+        return;
+    }
+
+    
+    var url = "/buses/" + startPlaceId + "/" + destinationPlaceId;
+    
+    var island = "{{ island }}";
+    
+    window.location.href = url + "/" + island;
+
+    }
+</script>
+  
+
+
+
+
+{%endblock%}
+
+

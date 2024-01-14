@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Events in {{ island }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Events</h1>
+        <ul class="list-group">
+            {% for event in event %}
+                <li class="list-group-item">
+                    <div class="row align-items-center"> 
+                        <div class="col-md-6 text-center"> 
+                            <h3>{{ event.nameEvent }} <small class="text-muted"> | Rating: {{ event.rating }}/5 | {{event.price}}€</small></h3>
+                            <p>Type: {{ event.type }}</p>
+                            <p>Date: {{event.date}}</p>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/event_images/' + event.image) }}" alt="{{ event.nameEvent }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

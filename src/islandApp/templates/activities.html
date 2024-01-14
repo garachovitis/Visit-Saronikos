@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ Activities in {{ location }}
+{% endblock title %}
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities in {{ location }}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+    .btn-custom {
+      background-color: transparent !important;
+      color: rgb(19, 16, 16) !important;
+      border: none !important;
+    }
+    .btn-custom:hover {
+      background-color: lightgray !important;
+      opacity: 0.7 !important;
+    }
+    .btn-custom:hover img {
+      filter: grayscale(100%) !important;
+      }
+
+
+    .btn img {
+      margin-right: 3px; 
+      }
+    </style>
+
+</head>
+
+<body>
+    <h2 class="aba_header">Activities in {{ location }} </h2>
+    <hr>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_food()" class="btn btn-custom" data-activity="Gastronomy">
+                    <img src="{{ url_for('static', filename='images/icons/estiator.png') }}" alt="food"
+                        class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                        height="90px" width="90px">
+                    <span>Gastronomy</span>
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_beaches()" class="btn btn-custom" data-activity="Culture">
+                    <img src="{{ url_for('static', filename='images/icons/beach.png') }}" alt="Beaches"
+                        class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                        height="90px" width="90px">
+                    <span>Beaches</span>
+                </button>
+            </div>
+
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_event()" class="btn btn-custom" data-activity="Events">
+                    <img src="{{ url_for('static', filename='images/icons/hmerologio.png') }}" alt="timetable"
+                        class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                        height="90px" width="90px">
+                    <span>Events</span>
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_stay()" class="btn btn-custom" data-activity="Stay">
+                    <img src="{{ url_for('static', filename='images/icons/hotel.png') }}" alt="stay"
+                        class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                        height="90px" width="90px">
+                    <span>Stays</span>
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_museum()" class="btn btn-custom" data-activity="museum">
+                    <img src="{{ url_for('static', filename='images/icons/museum.png') }}" alt="museum"
+                      class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                      height="90px" width="90px">
+                    <span>Museums</span>
+                </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                <button onclick="act_route()" class="btn btn-custom" data-activity="Nature">
+                    <img src="{{ url_for('static', filename='images/icons/routes.png') }}" alt="routes"
+                      class="img-responsive a_image img-fluid rounded mx-auto d-block shadow p-3 mb-5 bg-white"
+                      height="90px" width="90px">
+                    <span>Transport</span>
+                </button>
+
+
+                <div id="content"></div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+    </head>
+    <body>
+    </body>
+    </body>
+</body>
+<script  >
+    act_route= function() {
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/route/" + island; 
+    }
+</script>
+
+<script>
+    act_beaches = function() {
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/beaches/" + island; 
+    }
+</script>
+
+<script>
+    act_stay=function(){
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/stay/" + island; 
+    }
+</script>
+<script>
+    act_food=function(){
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/food/" + island; 
+    }
+</script>
+<script>
+    act_event=function(){
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/event/" + island; 
+    }   
+</script>
+<script>
+    act_museum=function(){
+      var url = window.location.href;
+      var island = url.substring(url.lastIndexOf('/') + 1);
+      window.location.href = "/museum/" + island; 
+    }
+</script>
+
+{% endblock content %}

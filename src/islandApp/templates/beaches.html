@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Beaches in {{ island }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Beaches</h1>
+        <ul class="list-group">
+            {% for beach in beaches %}
+                <li class="list-group-item">
+                    <div class="row align-items-center"> 
+                        <div class="col-md-6 text-center"> 
+                            <h3>{{ beach.beachName }} <small class="text-muted"> | Rating: {{ beach.rating }}/5</small></h3>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/beaches_images/' + beach.image) }}" alt="{{ beach.beachName }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

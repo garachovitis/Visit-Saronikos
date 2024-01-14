@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Buses in {{ island.capitalize() }}
+{% endblock %}
+
+{% block content %}
+{% if not connect %}
+<div class ="container mt - 5">
+            <h5>There is no available bus for the specific route</h5>
+            <ul class="list-group">
+                <li class="list-group-item">
+                <h3 class="mb-0">Taxi</h3>
+                </li>
+                {% for r in route %}
+                        <li class="list-group-item">
+                            <p class="mb-0">{{ r.BusName }}</p>
+                        </li>
+                {% endfor %}
+            </ul>
+{% else %}
+            {%for sp in connect%}
+                <div class="text-center">
+                    <h3>Bus: {{sp.BusName}} | {{sp.price}}€</h3>
+                    <h5>{{sp.schedule}}</h5>
+                    <img src="{{ url_for('static', filename='images/route_images/' + sp.image) }}" alt="{{ route.BusName }}" class="img-fluid rounded">
+                </div>
+            {%endfor%}
+{% endif %}
+</div>
+
+
+{% endblock %}

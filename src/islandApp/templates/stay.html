@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Hotels in {{ island.capitalize() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Hotels</h1>
+        <ul class="list-group">
+            {% for stay in stay %}
+                <li class="list-group-item">
+                    <div class="row align-items-center"> 
+                        <div class="col-md-6 text-center"> 
+                            <h3>{{ stay.name }} <small class="text-muted"> | Rating: {{ stay.rating }}/9 | {{ stay.pricePerNight }}€</small></h3>
+                            <p>Meal: {{ stay.food }}</p>
+                            <p>{{ stay.website }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/stay_images/' + stay.image) }}" alt="{{ stay.name }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

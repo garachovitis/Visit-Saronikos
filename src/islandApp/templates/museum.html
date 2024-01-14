@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Museums in {{ island.capitalize() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Museums</h1>
+        <ul class="list-group">
+            {% for museum in museum %}
+                <li class="list-group-item">
+                    <div class="row align-items-center"> 
+                        <div class="col-md-6 text-center"> 
+                            <h3>{{ museum.nameMuseum }} <small class="text-muted"> | {{museum.price}}€</small></h3>
+                            <p>Opening Hours: {{museum.workHours}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/museum_images/' + museum.image) }}" alt="{{ museum.nameMuseum }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

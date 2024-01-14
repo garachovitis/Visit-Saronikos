@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Restaurants in {{ island }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Restaurants</h1>
+        <ul class="list-group">
+            {% for food in food %}
+                <li class="list-group-item">
+                    <div class="row align-items-center"> 
+                        <div class="col-md-6 text-center"> 
+                            <h3>{{ food.name }} <small class="text-muted"> | Rating: {{ food.rating }}/5 | {{ food.pricePerPerson }}€ per person</small></h3>
+                            <p>Type: {{ food.type }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ url_for('static', filename='images/food_images/' + food.image) }}" alt="{{ food.name }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
